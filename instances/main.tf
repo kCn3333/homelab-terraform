@@ -55,8 +55,9 @@ resource "aws_instance" "kcn_srv" {
 
   provisioner "remote-exec" {
     inline = [
+      "sudo apt update -y",
       "sudo apt install nginx -y",
-      "sudo systemctl start nginx",
+      "sudo systemctl enable --now nginx",
       "echo '<h1>Welcome to kCn server</h1> ${self.public_dns}' | sudo tee /var/www/html/index.html"
     ]
   }
